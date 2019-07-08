@@ -1,0 +1,24 @@
+
+plugins {
+    id 'eclipse'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.7'
+}
+
+repositories {
+    mavenCentral()
+}
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+javafx {
+    version = "12"
+    modules = [ 'javafx.controls' ]
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}
+
+mainClassName = "com.thecodinginterface.randomnumber.AppLauncher"
