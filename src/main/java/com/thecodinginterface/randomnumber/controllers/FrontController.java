@@ -2,25 +2,28 @@
 
 package com.thecodinginterface.randomnumber.controllers;
 
+import com.thecodinginterface.randomnumber.repository.RandomNumberDAO;
+
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class FrontController {
-    public static final double APP_WIDTH = 350;
-    public static final double APP_HEIGHT = 400;
+    public static final double APP_WIDTH = 300;
+    public static final double APP_HEIGHT = 250;
 
     private static final FrontController INSTANCE = new FrontController();
+
+    private RandomNumberDAO randomNumberDAO;
 
     private Stage primaryStage;
     private BorderPane rootBorderPane;
 
     private FrontController() {
         rootBorderPane = new BorderPane();
-        rootBorderPane.setTop(makeNavMenu());
+        rootBorderPane.setTop(makeMenuBar());
     }
 
     public static FrontController getInstance() {
@@ -29,23 +32,28 @@ public class FrontController {
 
     private MenuBar makeMenuBar() {
         var menuBar = new MenuBar();
-        var numGeneratorMenuItem = new MenuItem("Generate Number");
-        var numListingMenuItem = new MenuItem("View Numbers");
+        var numGeneratorMenuItem = new Menu("Generate Number");
+        var numListingMenuItem = new Menu("View Numbers");
 
+        numGeneratorMenuItem.setOnAction(evt -> { showNumberGeneratorView(); });
+        numListingMenuItem.setOnAction(evt -> { showNumbersListView(); });
 
-        numGeneratorMenuItem.setOnAction(evt -> showNumberGeneratorView());
-        numListingMenuItem.setOnAction(evt -> showNumbersListView());
+        menuBar.getMenus().addAll(numGeneratorMenuItem, numListingMenuItem);
 
-        menuBar.getItems().addAll(numGeneratorMenuItem, numListingMenuItem)
-
-        hbox.getChildren().addAll(generateNumbers, viewNumbers);
-
-        return hbox;
+        return menuBar;
     }
 
     public void setStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.stage.setScene(new Scene(rootBorderPane, APP_WIDTH, APP_HEIGHT));
+        this.primaryStage.setScene(new Scene(rootBorderPane, APP_WIDTH, APP_HEIGHT));
+    }
+
+    public void setRandomNumberDAO(RandomNumberDAO randomNumberDAO) {
+        this.randomNumberDAO = randomNumberDAO;
+    }
+
+    public RandomNumberDAO getRandomNumberDAO() {
+        return randomNumberDAO;
     }
 
     public void showNumberGeneratorView() {
