@@ -1,0 +1,6 @@
+
+.result-label {
+    -fx-text-alignment: center;
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+}
