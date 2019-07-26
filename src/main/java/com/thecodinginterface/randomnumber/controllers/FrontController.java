@@ -2,6 +2,9 @@
 
 package com.thecodinginterface.randomnumber.controllers;
 
+import java.net.URL;
+
+import com.thecodinginterface.randomnumber.RandomNumberApp;
 import com.thecodinginterface.randomnumber.repository.RandomNumberDAO;
 
 import javafx.scene.Scene;
@@ -45,7 +48,10 @@ public class FrontController {
 
     public void setStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.primaryStage.setScene(new Scene(rootBorderPane, APP_WIDTH, APP_HEIGHT));
+        var scene = new Scene(rootBorderPane, APP_WIDTH, APP_HEIGHT);
+        URL url = RandomNumberApp.class.getResource("styles/styles.css");
+        scene.getStylesheets().add(url.toExternalForm());
+        this.primaryStage.setScene(scene);
     }
 
     public void setRandomNumberDAO(RandomNumberDAO randomNumberDAO) {
