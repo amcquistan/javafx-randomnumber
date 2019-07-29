@@ -7,7 +7,7 @@ import com.thecodinginterface.randomnumber.repository.LocalRandomNumberDAO;
 import com.thecodinginterface.randomnumber.repository.RandomNumberDAO;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 public class RandomNumberApp extends Application {
@@ -21,6 +21,8 @@ public class RandomNumberApp extends Application {
         frontController.setRandomNumberDAO(randomNumberDAO);
         frontController.showNumberGeneratorView();
         frontController.showStage();
+        stage.getScene().getStylesheets().add(
+                getClass().getResource("styles/styles.css").toExternalForm());
     }
 
     public static void main(String[] args) {

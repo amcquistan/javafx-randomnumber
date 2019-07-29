@@ -1,6 +1,8 @@
 package com.thecodinginterface.randomnumber.controllers;
 
+import java.awt.Rectangle;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import com.thecodinginterface.randomnumber.models.RandomNumber;
 import com.thecodinginterface.randomnumber.utils.RandomNumberUtils;
@@ -8,6 +10,7 @@ import com.thecodinginterface.randomnumber.utils.RandomNumberUtils;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
@@ -15,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class NumberGeneratorController extends BaseController {
@@ -25,16 +29,21 @@ public class NumberGeneratorController extends BaseController {
 
     @Override
     AnchorPane getContentPane() {
-        GridPane gridPane = new GridPane();
+        Rectangle original = new Rectangle(1,2,3,4);
+        Rectangle[] rects = Arrays.stream(new Rectangle[3]).map($_ -> new Rectangle(original.getSize())).toArray(Rectangle[]::new);
+        var gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
 
         gridPane.addRow(0, new Label("Min Value"), minValTextField);
         gridPane.addRow(1, new Label("Max Value"), maxValTextField);
 
-        Button resultBtn = new Button("Generate Number");
-        Button clearBtn = new Button("Clear");
+        var resultBtn = new Button("Generate Number");
+        var clearBtn = new Button("Clear");
 
+        resultBtn.getStyleClass().add("rich-blue-btn");
+        clearBtn.getStyleClass().add("rich-blue-btn");
+        
         resultBtn.disableProperty().bind(
             minValTextField.textProperty().isEmpty().and(
                 maxValTextField.textProperty().isEmpty()
@@ -42,7 +51,6 @@ public class NumberGeneratorController extends BaseController {
         );
 
         resultBtn.setOnAction(evt -> {
-            System.out.println("Result Button Clicked");
             int lowerBounds = 0;
             int upperBounds = 1;
             try {
@@ -70,21 +78,33 @@ public class NumberGeneratorController extends BaseController {
             resultLbl.setText(NUMBER_PLACEHOLDER);
         });
 
-        ButtonBar buttonBar = new ButtonBar();
+        var buttonBar = new ButtonBar();
         buttonBar.getButtons().addAll(resultBtn, clearBtn);
         
         gridPane.add(buttonBar, 0, 2, 2, 1);
         GridPane.setHalignment(buttonBar, HPos.CENTER);
         
-        VBox vbox = new VBox();
+        var vbox = new VBox();
         vbox.setPadding(new Insets(20, 20, 20, 20));
         vbox.setAlignment(Pos.CENTER);
-        HBox hbox = new HBox(resultLbl);
+        var hbox = new HBox(resultLbl);
         hbox.setAlignment(Pos.CENTER);
         vbox.getChildren().addAll(hbox, gridPane);
 
         resultLbl.getStyleClass().add("result-label");
         
-        return new AnchorPane(vbox);
+        var group = new Group(vbox);
+        var stackPane = new StackPane(group);
+        StackPane.setAlignment(group, Pos.CENTER);
+        
+        var anchorPane = new AnchorPane(stackPane);
+        
+        AnchorPane.setTopAnchor(stackPane, 10.0);
+        AnchorPane.setBottomAnchor(stackPane, 10.0);
+        AnchorPane.setLeftAnchor(stackPane, 10.0);
+        AnchorPane.setRightAnchor(stackPane, 10.0);
+        
+        
+        return anchorPane;
     }
 }

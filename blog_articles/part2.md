@@ -2,14 +2,13 @@
 
 ### Introduction
 
-In this second article I will be building out the Random Number generator application described in the opening blog post. For this series I will be forgoing the use of FXML views and not using the SceneBuilder design tool so the reader can have a task of how to do so without it or when it simply makes more sense to code things by hand. In the next post I will refactor using the SceneBuilder along with FXML views.
+In this second article I will be building out the Random Number generator application described in the opening blog post. For this series I will be forgoing the use of FXML views and not using the SceneBuilder design tool to give the reader a taste of how to do so without it or when it simply makes more sense to code things by hand. In the next post I will refactor using SceneBuilder and FXML view files.
 
 __Series Contents__
 
 * JavaFX Development with Gradle, Eclipse, SceneBuilder and OpenJDK 11: Project Setup
 * JavaFX Development with Gradle, Eclipse, SceneBuilder and OpenJDK 11: Java only Components
 * JavaFX Development with Gradle, Eclipse, SceneBuilder and OpenJDK 11: Refactoring to use FXML
-* JavaFX Development with Gradle, Eclipse, SceneBuilder and OpenJDK 11: Distribuing the Application
 
 ### Closer Look at the Hello World App
 
