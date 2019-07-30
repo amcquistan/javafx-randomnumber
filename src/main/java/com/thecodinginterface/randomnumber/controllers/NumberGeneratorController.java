@@ -1,8 +1,6 @@
 package com.thecodinginterface.randomnumber.controllers;
 
-import java.awt.Rectangle;
 import java.time.LocalDate;
-import java.util.Arrays;
 
 import com.thecodinginterface.randomnumber.models.RandomNumber;
 import com.thecodinginterface.randomnumber.utils.RandomNumberUtils;
@@ -29,8 +27,6 @@ public class NumberGeneratorController extends BaseController {
 
     @Override
     AnchorPane getContentPane() {
-        Rectangle original = new Rectangle(1,2,3,4);
-        Rectangle[] rects = Arrays.stream(new Rectangle[3]).map($_ -> new Rectangle(original.getSize())).toArray(Rectangle[]::new);
         var gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
@@ -40,9 +36,6 @@ public class NumberGeneratorController extends BaseController {
 
         var resultBtn = new Button("Generate Number");
         var clearBtn = new Button("Clear");
-
-        resultBtn.getStyleClass().add("rich-blue-btn");
-        clearBtn.getStyleClass().add("rich-blue-btn");
         
         resultBtn.disableProperty().bind(
             minValTextField.textProperty().isEmpty().and(
@@ -85,7 +78,6 @@ public class NumberGeneratorController extends BaseController {
         GridPane.setHalignment(buttonBar, HPos.CENTER);
         
         var vbox = new VBox();
-        vbox.setPadding(new Insets(20, 20, 20, 20));
         vbox.setAlignment(Pos.CENTER);
         var hbox = new HBox(resultLbl);
         hbox.setAlignment(Pos.CENTER);
@@ -103,7 +95,6 @@ public class NumberGeneratorController extends BaseController {
         AnchorPane.setBottomAnchor(stackPane, 10.0);
         AnchorPane.setLeftAnchor(stackPane, 10.0);
         AnchorPane.setRightAnchor(stackPane, 10.0);
-        
         
         return anchorPane;
     }

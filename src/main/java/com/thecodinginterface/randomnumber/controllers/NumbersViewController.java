@@ -13,10 +13,11 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class NumbersViewController extends BaseController {
-
+    
     @Override
     AnchorPane getContentPane() {
         
@@ -27,6 +28,7 @@ public class NumbersViewController extends BaseController {
                 .collect(Collectors.toList());
         
         var table = new TableView<RandomNumberViewModel>(FXCollections.observableArrayList(numbers));
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
         var numberColumn = new TableColumn<RandomNumberViewModel, Integer>("Number");
         var lowerBoundsColumn = new TableColumn<RandomNumberViewModel, Integer>("Min Value");
@@ -57,11 +59,21 @@ public class NumbersViewController extends BaseController {
         table.getColumns().add(createdAtColumn);
         
         var vbox = new VBox();
-        vbox.setPadding(new Insets(20, 20, 20, 20));
+        vbox.setPadding(new Insets(10, 5, 10, 5));
         vbox.setAlignment(Pos.CENTER);
         
         vbox.getChildren().add(table);
         
-        return new AnchorPane(vbox);
+        var stackPane = new StackPane(vbox);
+        StackPane.setAlignment(vbox, Pos.CENTER);
+        
+        var anchorPane = new AnchorPane(stackPane);
+        
+        AnchorPane.setTopAnchor(stackPane, 10.0);
+        AnchorPane.setBottomAnchor(stackPane, 10.0);
+        AnchorPane.setLeftAnchor(stackPane, 10.0);
+        AnchorPane.setRightAnchor(stackPane, 10.0);
+        
+        return anchorPane;
     }
 }

@@ -8,21 +8,18 @@ import com.thecodinginterface.randomnumber.RandomNumberApp;
 import com.thecodinginterface.randomnumber.repository.RandomNumberDAO;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 public class FrontController {
     public static final double APP_WIDTH = 500;
-    public static final double APP_HEIGHT = 400;
+    public static final double APP_HEIGHT = 350;
 
     private static final FrontController INSTANCE = new FrontController();
 
@@ -33,7 +30,6 @@ public class FrontController {
 
     private FrontController() {
         rootBorderPane = new BorderPane();
-//        rootBorderPane.setTop(makeMenuBar());
         rootBorderPane.setTop(makeNavBar());
     }
 
@@ -41,41 +37,28 @@ public class FrontController {
         return INSTANCE;
     }
 
-    private ToolBar makeNavBar() {
-        var generateNumbersBtn = new Button("Generate Number");
-        var viewNumbersBtn = new Button("View Numbers");
+    private HBox makeNavBar() {
+        var generateNumbersBtn = new ToggleButton("Generate Number");
+        var viewNumbersBtn = new ToggleButton("View Numbers");
+        var toggleGroup = new ToggleGroup();
+        generateNumbersBtn.setToggleGroup(toggleGroup);
+        viewNumbersBtn.setToggleGroup(toggleGroup);
+        generateNumbersBtn.setSelected(true);
         
-        generateNumbersBtn.getStyleClass().add("dark-blue-btn");
-        viewNumbersBtn.getStyleClass().add("dark-blue-btn");
+        generateNumbersBtn.getStyleClass().add("navbar-btn");
+        viewNumbersBtn.getStyleClass().add("navbar-btn");
         generateNumbersBtn.setOnAction(evt -> showNumberGeneratorView());
         viewNumbersBtn.setOnAction(evt -> showNumbersListView());
         
         var imageView = new ImageView(new Image(RandomNumberApp.class.getResourceAsStream("images/TCI-Logo.png")));
         imageView.setPreserveRatio(true);
-        imageView.setFitWidth(80);
+        imageView.setFitWidth(58);
+        var logoLbl = new Label("", imageView);
+        logoLbl.getStyleClass().add("navbar-logo");
+        var hbox = new HBox(logoLbl, generateNumbersBtn, viewNumbersBtn);
+        hbox.getStyleClass().add("navbar");
         
-        return new ToolBar(new Label("", imageView), generateNumbersBtn, viewNumbersBtn);
-    }
-    
-    private MenuBar makeMenuBar() {
-        var menuBar = new MenuBar();
-       
-        var numGeneratorMenu = new Menu("Generate Number");
-        var numListingMenu = new Menu("View Numbers");
-
-        numGeneratorMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, evt -> {
-            System.out.println("numGeneratorMenu clicked");
-        });
-        numListingMenu.addEventHandler(MouseEvent.MOUSE_CLICKED, evt -> {
-            System.out.println("numListingMenu clicked");
-        });
-        
-//        numGeneratorMenuItem.setOnAction(evt -> { System.out.println("numGeneratorMenuItem clicked"); });
-//        numListingMenuItem.setOnAction(evt -> { showNumbersListView(); });
-
-        menuBar.getMenus().addAll(numGeneratorMenu, numListingMenu);
-
-        return menuBar;
+        return hbox;
     }
 
     public void setStage(Stage primaryStage) {
@@ -99,7 +82,6 @@ public class FrontController {
     }
 
     public void showNumbersListView() {
-        System.out.println("showNumbersListView clicked");
         updateContent(new NumbersViewController());
     }
     
