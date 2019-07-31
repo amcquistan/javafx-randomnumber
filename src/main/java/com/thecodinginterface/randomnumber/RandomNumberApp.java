@@ -7,7 +7,6 @@ import com.thecodinginterface.randomnumber.repository.LocalRandomNumberDAO;
 import com.thecodinginterface.randomnumber.repository.RandomNumberDAO;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class RandomNumberApp extends Application {
@@ -26,5 +25,4 @@ public class RandomNumberApp extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }

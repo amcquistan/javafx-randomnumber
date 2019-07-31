@@ -1,6 +1,71 @@
-
+/* center align the text, make it big and bold */
 .result-label {
     -fx-text-alignment: center;
     -fx-font-size: 48px;
     -fx-font-weight: bold;
+    -fx-padding: 0 10 30 10;
+}
+
+/* 
+ * add blue background, give no border, and align
+ * content center (vertically) and left (horizontally) 
+ */
+.navbar {
+    -fx-background-color: #426ab7;
+    -fx-padding: 0 10 0 10;
+    -fx-border-width: 0;
+    -fx-alignment: center-left;
+}
+
+/* flat button with off-white / gray text and dark blue background */
+.navbar-btn {
+    -fx-background-radius: 0;
+    -fx-background-color: #426ab7;
+    -fx-padding: 10 20 10 20;
+    -fx-text-fill: #c7d1d8;
+    -fx-font-size: 14px;
+}
+
+/* hover transitions to white text */
+.navbar-btn:hover {
+    -fx-text-fill: white;
+}
+
+/* 
+ * selected pseudo class is specific to toggle button,
+ * the border style rules put a solid white under line in
+ */
+.navbar-btn:selected {
+    -fx-border-width: 0 0 4 0;
+    -fx-border-color: white;
+    -fx-text-fill: white;
+}
+
+/* pad the logo label (top, right, bottom, left) */
+.navbar-logo {
+    -fx-padding: 2 20 2 10;
+}
+
+.button {
+    -fx-background-color: #03a8f8;
+    -fx-background-radius: 0;
+    -fx-padding: 10 20 10 20;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+}
+
+.button:hover {
+    -fx-background-color: #426ab7;
+}
+
+.button:pressed {
+    -fx-text-fill: black;
+}
+
+.table-view .column-header,
+.table-view .column-header .filler,
+.table-view .column-header .label,
+.table-view .column-header-background .filler {
+    -fx-background-color: #03a8f8;
+    -fx-text-fill: white;
 }

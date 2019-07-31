@@ -8,6 +8,7 @@ import com.thecodinginterface.randomnumber.utils.RandomNumberUtils;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
@@ -15,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class NumberGeneratorController extends BaseController {
@@ -25,24 +27,29 @@ public class NumberGeneratorController extends BaseController {
 
     @Override
     AnchorPane getContentPane() {
-        GridPane gridPane = new GridPane();
+        var gridPane = new GridPane();
         gridPane.setHgap(10);
         gridPane.setVgap(10);
 
         gridPane.addRow(0, new Label("Min Value"), minValTextField);
         gridPane.addRow(1, new Label("Max Value"), maxValTextField);
 
-        Button resultBtn = new Button("Generate Number");
-        Button clearBtn = new Button("Clear");
+        var resultBtn = new Button("Generate Number");
+        var clearBtn = new Button("Clear");
+        
+        var buttonBar = new ButtonBar();
+        buttonBar.getButtons().addAll(resultBtn, clearBtn);
 
+        gridPane.add(buttonBar, 0, 2, 2, 1);
+        GridPane.setHalignment(buttonBar, HPos.CENTER);
+        
         resultBtn.disableProperty().bind(
-            minValTextField.textProperty().isEmpty().and(
+            minValTextField.textProperty().isEmpty().or(
                 maxValTextField.textProperty().isEmpty()
             )
         );
 
         resultBtn.setOnAction(evt -> {
-            System.out.println("Result Button Clicked");
             int lowerBounds = 0;
             int upperBounds = 1;
             try {
@@ -69,22 +76,28 @@ public class NumberGeneratorController extends BaseController {
             maxValTextField.setText(null);
             resultLbl.setText(NUMBER_PLACEHOLDER);
         });
-
-        ButtonBar buttonBar = new ButtonBar();
-        buttonBar.getButtons().addAll(resultBtn, clearBtn);
         
-        gridPane.add(buttonBar, 0, 2, 2, 1);
-        GridPane.setHalignment(buttonBar, HPos.CENTER);
-        
-        VBox vbox = new VBox();
-        vbox.setPadding(new Insets(20, 20, 20, 20));
+        var vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
-        HBox hbox = new HBox(resultLbl);
+        
+        var hbox = new HBox(resultLbl);
         hbox.setAlignment(Pos.CENTER);
+        
         vbox.getChildren().addAll(hbox, gridPane);
 
         resultLbl.getStyleClass().add("result-label");
         
-        return new AnchorPane(vbox);
+        var group = new Group(vbox);
+        var stackPane = new StackPane(group);
+        StackPane.setAlignment(group, Pos.CENTER);
+        
+        var anchorPane = new AnchorPane(stackPane);
+        
+        AnchorPane.setTopAnchor(stackPane, 10.0);
+        AnchorPane.setBottomAnchor(stackPane, 10.0);
+        AnchorPane.setLeftAnchor(stackPane, 10.0);
+        AnchorPane.setRightAnchor(stackPane, 10.0);
+
+        return anchorPane;
     }
 }
