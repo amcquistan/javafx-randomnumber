@@ -37,8 +37,14 @@ public class NumberGeneratorController extends BaseController {
         var resultBtn = new Button("Generate Number");
         var clearBtn = new Button("Clear");
         
+        var buttonBar = new ButtonBar();
+        buttonBar.getButtons().addAll(resultBtn, clearBtn);
+
+        gridPane.add(buttonBar, 0, 2, 2, 1);
+        GridPane.setHalignment(buttonBar, HPos.CENTER);
+        
         resultBtn.disableProperty().bind(
-            minValTextField.textProperty().isEmpty().and(
+            minValTextField.textProperty().isEmpty().or(
                 maxValTextField.textProperty().isEmpty()
             )
         );
@@ -70,17 +76,13 @@ public class NumberGeneratorController extends BaseController {
             maxValTextField.setText(null);
             resultLbl.setText(NUMBER_PLACEHOLDER);
         });
-
-        var buttonBar = new ButtonBar();
-        buttonBar.getButtons().addAll(resultBtn, clearBtn);
-        
-        gridPane.add(buttonBar, 0, 2, 2, 1);
-        GridPane.setHalignment(buttonBar, HPos.CENTER);
         
         var vbox = new VBox();
         vbox.setAlignment(Pos.CENTER);
+        
         var hbox = new HBox(resultLbl);
         hbox.setAlignment(Pos.CENTER);
+        
         vbox.getChildren().addAll(hbox, gridPane);
 
         resultLbl.getStyleClass().add("result-label");
@@ -95,7 +97,7 @@ public class NumberGeneratorController extends BaseController {
         AnchorPane.setBottomAnchor(stackPane, 10.0);
         AnchorPane.setLeftAnchor(stackPane, 10.0);
         AnchorPane.setRightAnchor(stackPane, 10.0);
-        
+
         return anchorPane;
     }
 }

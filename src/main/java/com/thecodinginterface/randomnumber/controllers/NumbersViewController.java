@@ -27,7 +27,9 @@ public class NumbersViewController extends BaseController {
                 .map(RandomNumberViewModel::new)
                 .collect(Collectors.toList());
         
-        var table = new TableView<RandomNumberViewModel>(FXCollections.observableArrayList(numbers));
+        var table = new TableView<RandomNumberViewModel>(
+                FXCollections.observableArrayList(numbers));
+        
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
         var numberColumn = new TableColumn<RandomNumberViewModel, Integer>("Number");
@@ -35,10 +37,14 @@ public class NumbersViewController extends BaseController {
         var upperBoundsColumn = new TableColumn<RandomNumberViewModel, Integer>("Max Value");
         var createdAtColumn = new TableColumn<RandomNumberViewModel, LocalDate>("Created");
         
-        numberColumn.setCellValueFactory(cell -> cell.getValue().numberProperty().asObject());
-        lowerBoundsColumn.setCellValueFactory(cell -> cell.getValue().lowerBoundsProperty().asObject());
-        upperBoundsColumn.setCellValueFactory(cell -> cell.getValue().upperBoundsProperty().asObject());
-        createdAtColumn.setCellValueFactory(cell -> cell.getValue().createdAtProperty());
+        numberColumn.setCellValueFactory(cell -> 
+                cell.getValue().numberProperty().asObject());
+        lowerBoundsColumn.setCellValueFactory(cell ->
+                cell.getValue().lowerBoundsProperty().asObject());
+        upperBoundsColumn.setCellValueFactory(cell ->
+                cell.getValue().upperBoundsProperty().asObject());
+        createdAtColumn.setCellValueFactory(cell ->
+                cell.getValue().createdAtProperty());
         
         createdAtColumn.setCellFactory(column -> {
             return new TableCell<RandomNumberViewModel, LocalDate>() {
