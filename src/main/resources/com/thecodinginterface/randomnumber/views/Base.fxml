@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane fx:id="rootBorderPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.thecodinginterface.randomnumber.controllers.FrontController">
+   <top>
+      <HBox styleClass="navbar" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="logoLbl" styleClass="navbar-logo">
+               <graphic>
+                  <ImageView fx:id="logoImgView" fitHeight="80.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Label>
+            <ToggleButton fx:id="generateNumbersBtn" mnemonicParsing="false" styleClass="navbar-btn" text="Generate Numbers" />
+            <ToggleButton fx:id="viewNumbersBtn" mnemonicParsing="false" styleClass="navbar-btn" text="View Numbers" />
+         </children></HBox>
+   </top>
+</BorderPane>

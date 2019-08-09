@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@../styles/styles.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1" fx:controller="com.thecodinginterface.randomnumber.controllers.NumbersViewController">
+   <children>
+      <StackPane prefHeight="150.0" prefWidth="200.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <VBox prefHeight="200.0" prefWidth="100.0" StackPane.alignment="CENTER">
+               <children>
+                  <TableView fx:id="table" prefHeight="361.0" prefWidth="560.0">
+                    <columns>
+                      <TableColumn fx:id="numberColumn" prefWidth="75.0" text="Number" />
+                      <TableColumn fx:id="lowerBoundsColumn" prefWidth="75.0" text="Min Value" />
+                        <TableColumn fx:id="upperBoundsColumn" prefWidth="75.0" text="Max Value" />
+                        <TableColumn fx:id="createdAtColumn" prefWidth="75.0" text="Created" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

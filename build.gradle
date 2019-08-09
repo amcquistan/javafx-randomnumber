@@ -14,7 +14,7 @@ targetCompatibility = 11
 
 javafx {
     version = "12"
-    modules = [ 'javafx.controls' ]
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 dependencies {
