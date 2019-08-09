@@ -8,3 +8,4 @@ which creates and displays random numbers.
 The branches for this repo are meant to follow along with the Blog series
 
 * Article [JavaFX Development with Gradle, Eclipse, SceneBuilder and OpenJDK 11: Java Coded Components](https://thecodinginterface.com/blog/javafx-with-gradle-and-eclipse-java-components/) ending state matches branch [java-coded-componenets-done](https://github.com/amcquistan/javafx-randomnumber/tree/java-coded-componenets-done)
+* Article [JavaFX with Gradle, Eclipse, Scene Builder and OpenJDK 11: Refactor with FXML and Scene Builder](https://thecodinginterface.com/blog/javafx-with-gradle-eclipse-fxml-scenebuilder/) ending state matches branch [master](https://github.com/amcquistan/javafx-randomnumber/tree/master)
